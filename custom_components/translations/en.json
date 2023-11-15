@@ -10,6 +10,7 @@
         "description": "Integration settings",
         "data": {
           "username": "Username",
+          "label": "Label for this configuration",
           "password": "Password",
           "language": "Language",
           "latitude": "Latitude",

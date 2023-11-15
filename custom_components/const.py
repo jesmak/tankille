@@ -6,6 +6,7 @@ FUEL_TYPES = {"95": "95E10", "98": "98E5", "dsl": "Diesel", "dsl+": "Diesel+", "
 
 LANGUAGES = ["fi", "en"]
 CONF_DEVICE = "device"
+CONF_LABEL = "label"
 CONF_LATITUDE = "latitude"
 CONF_LONGITUDE = "longitude"
 CONF_DISTANCE = "distance"

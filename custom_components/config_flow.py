@@ -17,7 +17,7 @@ from .const import (
     CONF_LATITUDE,
     CONF_LONGITUDE,
     CONF_DISTANCE,
-    LANGUAGES, CONF_DEVICE,
+    LANGUAGES, CONF_DEVICE, CONF_LABEL,
 )
 from .session import TankilleException, TankilleSession
 
@@ -25,6 +25,7 @@ _LOGGER = logging.getLogger(__name__)
 
 CONFIGURE_SCHEMA = vol.Schema(
     {
+        vol.Required(CONF_LABEL): cv.string,
         vol.Required(CONF_USERNAME): cv.string,
         vol.Required(CONF_PASSWORD): cv.string,
         vol.Required(CONF_LANGUAGE): vol.All(cv.string, vol.In(LANGUAGES)),
@@ -57,7 +58,7 @@ async def validate_input(hass: HomeAssistant, data: dict[str, any]) -> str:
     except TankilleException:
         raise InvalidAuth
 
-    return data[CONF_DEVICE]
+    return data[CONF_LABEL]
 
 
 class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
@@ -111,8 +112,9 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
         errors = {}
 
         try:
-            user_input["username"] = self._config_entry.data[CONF_USERNAME]
-            user_input["device"] = self._config_entry.data[CONF_DEVICE]
+            user_input[CONF_USERNAME] = self._config_entry.data[CONF_USERNAME]
+            user_input[CONF_LABEL] = self._config_entry.data[CONF_LABEL]
+            user_input[CONF_DEVICE] = self._config_entry.data[CONF_DEVICE]
             await validate_input(self.hass, user_input)
         except InvalidAuth:
             errors["base"] = "invalid_auth"

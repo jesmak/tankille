@@ -1,7 +1,6 @@
 import datetime
 import logging
 from datetime import (timedelta, datetime)
-from decimal import Decimal
 from typing import Any
 
 from homeassistant import config_entries, core

@@ -10,6 +10,7 @@
         "description": "Integraation asetukset",
         "data": {
           "username": "Käyttäjätunnus",
+          "label": "Tämän määrityksen otsikko",
           "password": "Salasana",
           "language": "Kieli",
           "latitude": "Leveyspiiri",
