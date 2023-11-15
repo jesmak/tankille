@@ -1,0 +1,75 @@
+{
+  "config": {
+    "error": {
+      "invalid_auth": "Kirjautuminen annetuilla tunnuksilla ei onnistunut",
+      "unknown": "Odottamaton virhe"
+    },
+    "step": {
+      "user": {
+        "title": "Tankille.fi polttoainehinnat",
+        "description": "Integraation asetukset",
+        "data": {
+          "username": "Käyttäjätunnus",
+          "password": "Salasana",
+          "language": "Kieli",
+          "latitude": "Leveyspiiri",
+          "longitude": "Pituuspiiri",
+          "distance": "Maksimietäisyys metreinä"
+        }
+      }
+    }
+  },
+  "options": {
+    "error": {
+      "invalid_auth": "Kirjautuminen annetuilla tunnuksilla ei onnistunut",
+      "unknown": "Odottamaton virhe"
+    },
+    "step": {
+      "init": {
+        "title": "Tankille.fi polttoainehinnat",
+        "description": "Hintahaun asetukset",
+        "data": {
+          "password": "Salasana",
+          "language": "Kieli",
+          "latitude": "Leveyspiiri",
+          "longitude": "Pituuspiiri",
+          "distance": "Maksimietäisyys metreinä"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "95": {
+        "name": "95E10"
+      },
+      "98": {
+        "name": "98E5"
+      },
+      "dsl": {
+        "name": "Diesel"
+      },
+      "dsl+": {
+        "name": "Diesel Plus"
+      },
+      "bgas": {
+        "name": "Biokaasu"
+      },
+      "ngas": {
+        "name": "Maakaasu"
+      },
+      "hvo": {
+        "name": "Uusiutuva diesel"
+      },
+      "85": {
+        "name": "RE85"
+      },
+      "99": {
+        "name": "99E5"
+      },
+      "98+": {
+        "name": "98E5 Plus"
+      }
+    }
+  }
+}

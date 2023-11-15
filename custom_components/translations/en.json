@@ -1,0 +1,75 @@
+{
+  "config": {
+    "error": {
+      "invalid_auth": "Could not log in with provided credentials",
+      "unknown": "Unknown error occured"
+    },
+    "step": {
+      "user": {
+        "title": "Tankille.fi fuel prices",
+        "description": "Integration settings",
+        "data": {
+          "username": "Username",
+          "password": "Password",
+          "language": "Language",
+          "latitude": "Latitude",
+          "longitude": "Longitude",
+          "distance": "Maximum distance in meters"
+        }
+      }
+    }
+  },
+  "options": {
+    "error": {
+      "invalid_auth": "Could not log in with provided credentials",
+      "unknown": "Unknown error occured"
+    },
+    "step": {
+      "init": {
+        "title": "Tankille.fi fuel prices",
+        "description": "Integration settings",
+        "data": {
+          "password": "Password",
+          "language": "Language",
+          "latitude": "Latitude",
+          "longitude": "Longitude",
+          "distance": "Maximum distance in meters"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "95": {
+        "name": "95E10"
+      },
+      "98": {
+        "name": "98E5"
+      },
+      "dsl": {
+        "name": "Diesel"
+      },
+      "dsl+": {
+        "name": "Diesel Plus"
+      },
+      "bgas": {
+        "name": "Biogas"
+      },
+      "ngas": {
+        "name": "Natural gas"
+      },
+      "hvo": {
+        "name": "Renewable diesel"
+      },
+      "85": {
+        "name": "RE85"
+      },
+      "99": {
+        "name": "99E5"
+      },
+      "98+": {
+        "name": "98E5 Plus"
+      }
+    }
+  }
+}
