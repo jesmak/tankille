@@ -54,7 +54,7 @@ class TankilleSensor(TankilleCoordinatorEntity, SensorEntity):
 
         for price in station["price"]:
             if price["tag"] is fuel:
-                updated = datetime.fromisoformat(str(price["updated"])).replace(tzinfo=datetime.now().astimezone().tzinfo)
+                updated = datetime.fromisoformat(str(price["updated"]).removesuffix('Z')).replace(tzinfo=datetime.now().astimezone().tzinfo)
                 fuel_price = f"{price['price']:.3f}"
                 fuel_type = fuel
                 break
