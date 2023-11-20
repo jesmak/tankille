@@ -15,7 +15,9 @@
           "language": "Kieli",
           "latitude": "Leveyspiiri",
           "longitude": "Pituuspiiri",
-          "distance": "Maksimietäisyys metreinä"
+          "distance": "Maksimietäisyys metreinä",
+          "ignored_chains": "Ketjut joita ei haeta (pilkuilla erotettu lista)",
+          "fuels": "Polttoainetyypit (pilkuilla erotettu lista, kaikki haetaan jos tyhjä)"
         }
       }
     }

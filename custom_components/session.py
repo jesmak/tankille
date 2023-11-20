@@ -1,4 +1,5 @@
 import logging
+from random import random
 from typing import Optional
 
 import requests
@@ -32,6 +33,8 @@ class TankilleSession:
         self._language = language
         self._distance = distance
         self._timeout = timeout
+        self._refreshToken = ''
+        self._accessToken = ''
 
     def authenticate(self) -> None:
         try:
@@ -65,8 +68,6 @@ class TankilleSession:
 
             self._accessToken = response.json()["accessToken"]
 
-            print(response.json())
-
         except ConnectTimeout as exception:
             raise TankilleException("Timeout error") from exception
 
@@ -75,6 +76,9 @@ class TankilleSession:
 
     def call_api(self, reauthenticated=False) -> Optional[dict]:
         try:
+            if self._accessToken == '':
+                self.authenticate()
+
             response = requests.get(
                 url=f"{API_BASE_URL}/stations?location={self._location}&distance={self._distance}",
                 headers={
@@ -94,8 +98,7 @@ class TankilleSession:
                 raise TankilleException(f"{response.status_code} is not valid")
 
             else:
-                result = response.json() if response else {}
-                return result
+                return response.json() if response else {}
 
         except ConnectTimeout as exception:
             raise TankilleException("Timeout error") from exception

@@ -17,7 +17,7 @@ from .const import (
     CONF_LATITUDE,
     CONF_LONGITUDE,
     CONF_DISTANCE,
-    LANGUAGES, CONF_DEVICE, CONF_LABEL,
+    LANGUAGES, CONF_DEVICE, CONF_LABEL, CONF_IGNORED_CHAINS, CONF_FUELS,
 )
 from .session import TankilleException, TankilleSession
 
@@ -32,6 +32,8 @@ CONFIGURE_SCHEMA = vol.Schema(
         vol.Required(CONF_LATITUDE, default=61.0559): cv.latitude,
         vol.Required(CONF_LONGITUDE, default=28.1830): cv.longitude,
         vol.Required(CONF_DISTANCE, default=10000): cv.positive_int,
+        vol.Optional(CONF_IGNORED_CHAINS): cv.string,
+        vol.Optional(CONF_FUELS): cv.string,
     }
 )
 
@@ -42,6 +44,8 @@ RECONFIGURE_SCHEMA = vol.Schema(
         vol.Required(CONF_LATITUDE): cv.latitude,
         vol.Required(CONF_LONGITUDE): cv.longitude,
         vol.Required(CONF_DISTANCE): cv.positive_int,
+        vol.Optional(CONF_IGNORED_CHAINS): cv.string,
+        vol.Optional(CONF_FUELS): cv.string,
     }
 )
 
@@ -101,10 +105,10 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
                         vol.Required(CONF_PASSWORD, default=self._config_entry.data.get(CONF_PASSWORD)): cv.string,
                         vol.Required(CONF_LANGUAGE, default=self._config_entry.data.get(CONF_LANGUAGE)): vol.All(
                             cv.string, vol.In(LANGUAGES)),
-                        vol.Optional(CONF_LATITUDE, default=self._config_entry.data.get(CONF_LATITUDE)): cv.latitude,
+                        vol.Required(CONF_LATITUDE, default=self._config_entry.data.get(CONF_LATITUDE)): cv.latitude,
                         vol.Required(CONF_LONGITUDE,
                                      default=self._config_entry.data.get(CONF_LONGITUDE)): cv.longitude,
-                        vol.Optional(CONF_DISTANCE,
+                        vol.Required(CONF_DISTANCE,
                                      default=self._config_entry.data.get(CONF_DISTANCE)): cv.positive_int,
                     })
             )
