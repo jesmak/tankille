@@ -33,8 +33,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
 
     entities = []
 
-    ignored_chains = str(entry.data[CONF_IGNORED_CHAINS] if not None else '').lower().split(",")
-    fuels = str(entry.data[CONF_FUELS] if not None else '').lower().split(",")
+    ignored_chains = str(entry.data.get(CONF_IGNORED_CHAINS) if not None else '').lower().split(",")
+    fuels = str(entry.data.get(CONF_FUELS) if not None else '').lower().split(",")
 
     cheapest = {}
 
@@ -72,7 +72,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
             cheapest[fuel_type].sort(key=sort_price)
             entities.append(
                 CheapestSensor(coordinator, fuel_type,
-                               cheapest[fuel_type] if len(cheapest[fuel_type]) < 5 else cheapest[fuel_type][:5]))
+                               cheapest[fuel_type] if len(cheapest[fuel_type]) < 5 else cheapest[fuel_type][:5],
+                               ignored_chains))
 
     async_add_entities(entities)
 
@@ -118,7 +119,7 @@ class TankilleSensor(CoordinatorEntity, SensorEntity):
 
 
 class CheapestSensor(CoordinatorEntity, SensorEntity):
-    def __init__(self, coordinator: DataUpdateCoordinator, fuel_type: str, data: list):
+    def __init__(self, coordinator: DataUpdateCoordinator, fuel_type: str, data: list, ignored_chains: list[str]):
         super().__init__(coordinator)
         self._attr_attribution = ATTRIBUTION
         self._attr_icon = "mdi:currency-eur"
@@ -127,6 +128,7 @@ class CheapestSensor(CoordinatorEntity, SensorEntity):
         self._attr_translation_key = fuel_type
         self._attr_name = f"{coordinator.config_entry.data[CONF_LABEL]} {FUEL_TYPES[fuel_type]}"
         self._fuel_type = fuel_type
+        self._ignored_chains = ignored_chains
 
         attrs = {
             ATTR_FUEL_TYPE: fuel_type
@@ -143,12 +145,10 @@ class CheapestSensor(CoordinatorEntity, SensorEntity):
     @callback
     def _handle_coordinator_update(self) -> None:
 
-        ignored_chains = str(self.coordinator.entry.data[CONF_IGNORED_CHAINS] if not None else '').lower().split(",")
-
         data = []
 
         for station in self.coordinator.data:
-            if str(station["chain"]).lower() in ignored_chains:
+            if str(station["chain"]).lower() in self._ignored_chains:
                 continue
             elif self._fuel_type in station["fuels"]:
                 price = next((x for x in station["price"] if x["tag"] == self._fuel_type), None)
