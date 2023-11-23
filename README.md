@@ -22,17 +22,18 @@ of the top 5 cheapest stations for that fuel type.
 
 ### Integration settings
 
-| Name           | Type    | Requirement  | Description                                                                                                                                                                               | Default   |
-|----------------|---------|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
-| label          | string  | **Required** | Label for the configuration (shown in Home Assistant's integration view)                                                                                                                  |           |
-| username       | string  | **Required** | Username of your tankille.fi account (your email)                                                                                                                                         |           |
-| password       | string  | **Required** | Password of your tankille.fi account                                                                                                                                                      |           |
-| language       | string  | **Required** | Used language (fi or en)                                                                                                                                                                  | `fi`      |
-| latitude       | decimal | **Required** | Latitude for the center point of the area where fuel prices are retrieved from                                                                                                            | `61.0559` |
-| longitude      | decimal | **Required** | Longitude for the center point of the area where fuel prices are retrieved from                                                                                                           | `28.1830` |
-| distance       | int     | **Required** | Maximum distance in meters from the center point                                                                                                                                          | `10000`   |
-| ignored_chains | string  | **Optional** | Chains that are not retrieved. Comma separated list. Example: `teboil,st1`. If no value entered, all chains are retrieved.                                                                |           |
-| fuels          | string  | **Optional** | Fuel types that are retrieved. Comma separated list. Example: `95,98,98+`.  If no value entered, all fuel types are retrieved. Possible values: `85,95,98,98+,99,dsl,dsl+,hvo,ngas,bgas`  |           |
+| Name           | Type    | Requirement  | Description                                                                                                                                                                              | Default   |
+|----------------|---------|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
+| label          | string  | **Required** | Label for the configuration (shown in Home Assistant's integration view)                                                                                                                 |           |
+| username       | string  | **Required** | Username of your tankille.fi account (your email)                                                                                                                                        |           |
+| password       | string  | **Required** | Password of your tankille.fi account                                                                                                                                                     |           |
+| language       | string  | **Required** | Used language (fi or en)                                                                                                                                                                 | `fi`      |
+| latitude       | decimal | **Required** | Latitude for the center point of the area where fuel prices are retrieved from                                                                                                           | `61.0559` |
+| longitude      | decimal | **Required** | Longitude for the center point of the area where fuel prices are retrieved from                                                                                                          | `28.1830` |
+| distance       | uint    | **Required** | Maximum distance in meters from the center point                                                                                                                                         | `10000`   |
+| ignored_chains | string  | **Optional** | Chains that are not retrieved. Comma separated list. Example: `teboil,st1`. If no value entered, all chains are retrieved.                                                               |           |
+| fuels          | string  | **Optional** | Fuel types that are retrieved. Comma separated list. Example: `95,98,98+`.  If no value entered, all fuel types are retrieved. Possible values: `85,95,98,98+,99,dsl,dsl+,hvo,ngas,bgas` |           |
+| cheapest_limit | uint    | **Optional** | Age limit for price updates to be shown on cheapest prices list. If no value entered or 0, all prices are considered.                                                                    | `0`       |
 
 ### Example configuration for a map card
 
