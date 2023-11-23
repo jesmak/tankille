@@ -17,7 +17,8 @@
           "longitude": "Pituuspiiri",
           "distance": "Maksimietäisyys metreinä",
           "ignored_chains": "Ketjut joita ei haeta (pilkuilla erotettu lista)",
-          "fuels": "Polttoainetyypit (pilkuilla erotettu lista, kaikki haetaan jos tyhjä)"
+          "fuels": "Polttoainetyypit (pilkuilla erotettu lista, kaikki haetaan jos tyhjä)",
+          "cheapest_limit": "Raja-arvo halvimpien listalla näyttämiseksi (minuuteissa)"
         }
       }
     }
@@ -36,7 +37,10 @@
           "language": "Kieli",
           "latitude": "Leveyspiiri",
           "longitude": "Pituuspiiri",
-          "distance": "Maksimietäisyys metreinä"
+          "distance": "Maksimietäisyys metreinä",
+          "ignored_chains": "Ketjut joita ei haeta (pilkuilla erotettu lista)",
+          "fuels": "Polttoainetyypit (pilkuilla erotettu lista, kaikki haetaan jos tyhjä)",
+          "cheapest_limit": "Raja-arvo halvimpien listalla näyttämiseksi (minuuteissa)"
         }
       }
     }

@@ -11,7 +11,7 @@ from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, CoordinatorEntity
 
-from .const import DOMAIN, FUEL_TYPES, CONF_IGNORED_CHAINS, CONF_DEVICE, CONF_LABEL, CONF_FUELS
+from .const import DOMAIN, FUEL_TYPES, CONF_IGNORED_CHAINS, CONF_DEVICE, CONF_LABEL, CONF_FUELS, CONF_CHEAPEST_LIMIT
 
 _LOGGER = logging.getLogger(__name__)
 ATTRIBUTION = "Data provided by tankille.fi"
@@ -35,6 +35,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
 
     ignored_chains = str(entry.data.get(CONF_IGNORED_CHAINS) if not None else '').lower().split(",")
     fuels = str(entry.data.get(CONF_FUELS) if not None else '').lower().split(",")
+    cheapest_limit = entry.data.get(CONF_CHEAPEST_LIMIT)
 
     cheapest = {}
 
@@ -59,10 +60,12 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
                 price = next((x for x in station["price"] if x["tag"] == fuel_type), None)
                 entities.append(TankilleSensor(coordinator, station, fuel_type, price, device))
                 if price is not None:
-                    cheapest[fuel_type].append({ATTR_PRICE: price["price"], ATTR_STATION: station["name"],
-                                                ATTR_UPDATED: datetime.fromisoformat(
-                                                    str(price["updated"]).removesuffix('Z')).replace(
-                                                    tzinfo=datetime.now().astimezone().tzinfo)})
+                    updated = datetime.fromisoformat(str(price["updated"]).removesuffix('Z')).replace(
+                        tzinfo=datetime.now().astimezone().tzinfo)
+                    if cheapest_limit == 0 or cheapest_limit is None or (
+                            datetime.now(updated.tzinfo) - updated).total_seconds() < (cheapest_limit * 60):
+                        cheapest[fuel_type].append({ATTR_PRICE: price["price"], ATTR_STATION: station["name"],
+                                                    ATTR_UPDATED: updated})
 
     def sort_price(val: dict):
         return val["price"]

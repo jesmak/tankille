@@ -17,7 +17,7 @@ from .const import (
     CONF_LATITUDE,
     CONF_LONGITUDE,
     CONF_DISTANCE,
-    LANGUAGES, CONF_DEVICE, CONF_LABEL, CONF_IGNORED_CHAINS, CONF_FUELS,
+    LANGUAGES, CONF_DEVICE, CONF_LABEL, CONF_IGNORED_CHAINS, CONF_FUELS, CONF_CHEAPEST_LIMIT,
 )
 from .session import TankilleException, TankilleSession
 
@@ -34,6 +34,7 @@ CONFIGURE_SCHEMA = vol.Schema(
         vol.Required(CONF_DISTANCE, default=10000): cv.positive_int,
         vol.Optional(CONF_IGNORED_CHAINS): cv.string,
         vol.Optional(CONF_FUELS): cv.string,
+        vol.Optional(CONF_CHEAPEST_LIMIT, default=0): cv.positive_int,
     }
 )
 
@@ -46,6 +47,7 @@ RECONFIGURE_SCHEMA = vol.Schema(
         vol.Required(CONF_DISTANCE): cv.positive_int,
         vol.Optional(CONF_IGNORED_CHAINS): cv.string,
         vol.Optional(CONF_FUELS): cv.string,
+        vol.Optional(CONF_CHEAPEST_LIMIT): cv.positive_int,
     }
 )
 
@@ -110,6 +112,12 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
                                      default=self._config_entry.data.get(CONF_LONGITUDE)): cv.longitude,
                         vol.Required(CONF_DISTANCE,
                                      default=self._config_entry.data.get(CONF_DISTANCE)): cv.positive_int,
+                        vol.Optional(CONF_IGNORED_CHAINS,
+                                     default=self._config_entry.data.get(CONF_IGNORED_CHAINS)): cv.string,
+                        vol.Optional(CONF_FUELS,
+                                     default=self._config_entry.data.get(CONF_FUELS)): cv.string,
+                        vol.Optional(CONF_CHEAPEST_LIMIT,
+                                     default=self._config_entry.data.get(CONF_CHEAPEST_LIMIT)): cv.positive_int,
                     })
             )
 

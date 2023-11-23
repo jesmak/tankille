@@ -17,7 +17,8 @@
           "longitude": "Longitude",
           "distance": "Maximum distance in meters",
           "ignored_chains": "Chains that are ignored (comma separated list)",
-          "fuels": "Retrieved fuels (comma separated list, empty means all)"
+          "fuels": "Retrieved fuels (comma separated list, empty means all)",
+          "cheapest_limit": "Max age of price update to show on cheapest list (in minutes)"
         }
       }
     }
@@ -36,7 +37,10 @@
           "language": "Language",
           "latitude": "Latitude",
           "longitude": "Longitude",
-          "distance": "Maximum distance in meters"
+          "distance": "Maximum distance in meters",
+          "ignored_chains": "Chains that are ignored (comma separated list)",
+          "fuels": "Retrieved fuels (comma separated list, empty means all)",
+          "cheapest_limit": "Max age of price update to show on cheapest list (in minutes)"
         }
       }
     }
