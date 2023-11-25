@@ -82,11 +82,13 @@ entities:
     name: false
     entities:
       - attribute: station_1
+        hide_unavailable: true
         styles:
           width: 170px
           text-align: left
           font-size: 10px
       - attribute: price_1
+        hide_unavailable: true
         unit: €
         styles:
           width: 50px
@@ -101,11 +103,13 @@ entities:
     icon: ' '
     entities:
       - attribute: station_2
+        hide_unavailable: true
         styles:
           width: 170px
           text-align: left
           font-size: 10px
       - attribute: price_2
+        hide_unavailable: true
         unit: €
         styles:
           width: 50px
@@ -120,11 +124,13 @@ entities:
     icon: ' '
     entities:
       - attribute: station_3
+        hide_unavailable: true
         styles:
           width: 170px
           text-align: left
           font-size: 10px
       - attribute: price_3
+        hide_unavailable: true
         unit: €
         styles:
           width: 50px
