@@ -86,6 +86,7 @@ class TankilleSensor(CoordinatorEntity, SensorEntity):
                  device: DeviceInfo):
         super().__init__(coordinator)
         self._station_id = station["_id"]
+        self._fuel_type = fuel_type
         self._attr_attribution = ATTRIBUTION
         self._attr_icon = "mdi:gas-station"
         self._attr_native_unit_of_measurement = CURRENCY_EURO
@@ -108,7 +109,7 @@ class TankilleSensor(CoordinatorEntity, SensorEntity):
     def _handle_coordinator_update(self) -> None:
         station = next((x for x in self.coordinator.data if x["_id"] == self._station_id), None)
         if station is not None:
-            price = next((x for x in station["price"] if x["_id"] == self._attr_unique_id), None)
+            price = next((x for x in station["price"] if x["tag"] == self._fuel_type), None)
             if price is not None:
                 self._attr_extra_state_attributes[ATTR_UPDATED] = datetime.fromisoformat(
                     str(price["updated"]).removesuffix('Z')).replace(
